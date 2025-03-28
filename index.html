@@ -227,7 +227,29 @@
             document.getElementById("totalCell").textContent = total.toLocaleString();
         }
         
+        function calculateTotal() {
+            const rows = document.querySelectorAll("#optionTableBody tr");
+            let total = 0;
+            
+            rows.forEach(row => {
+                const input = row.querySelector("input[type='checkbox'], input[type='radio']");
+                if (!input) return;
+                
+                const priceCell = row.cells[3];
+                const price = parseInt(priceCell.textContent.replace(/,/g, ""), 10);
+                
+                if (input.checked) {
+                    total += price;
+                    row.classList.add("table-success");
+                } else {
+                    row.classList.remove("table-success");
+                }
+            });
+            
+            document.getElementById("totalCell").textContent = total.toLocaleString();
+        }
+
         window.onload = calculateTotal;
         </script>    
-  </body>
+    </body>
 </html>
