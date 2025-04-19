@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>의왕 고천 제일풍경채 옵션 계산기(예상)</title>
+    <title>의왕 고천 제일풍경채 옵션 계산기</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,14 +12,38 @@
   </head>
   <body>
     <div class="container">
-        <h1>의왕 고천 제일풍경채 옵션 계산기(예상)</h1>
+        <h1>의왕 고천 제일풍경채 옵션 계산기</h1>
         <div class="alert alert-success" role="alert">
-            본 옵션 계산기는 제일풍경채 파주 운정 사업장을 기준으로 만든 계산기로, 대략적인 예측에만 활용해주세요.<br>
-            <b>유승상</b> 님께서 만들어주신 엑셀 자료를 토대로 만들었습니다.<br>
+            본 옵션 계산기는 의왕 고천 제일풍경채 입주자 <a href="https://www.gc-jeil.co.kr/html/sub7/sub3.html" target="_blank">모집공고문</a>을 토대로 만들었습니다.<br>
             <br>
             ≪의왕 고천 제일풍경채 입주예정자협의회≫ 공식 카페에 오시면 더 많은 정보를 얻으실 수 있습니다.<br>
             <a href="https://cafe.naver.com/jeilview">https://cafe.naver.com/jeilview</a>
-
+        </div>
+        <div class="mb-3">
+            <label class="form-label d-block">타입 선택</label>
+            <div>
+                <input type="radio" class="btn-check" name="typeOption" id="typeAll" value="all" autocomplete="off" checked onchange="filterByType()">
+                <label class="btn btn-outline-primary me-2" for="typeAll">전체 보기</label>
+        
+                <input type="radio" class="btn-check" name="typeOption" id="typeA" value="A" autocomplete="off" onchange="filterByType()">
+                <label class="btn btn-outline-primary me-2" for="typeA">A 타입</label>
+        
+                <input type="radio" class="btn-check" name="typeOption" id="typeB" value="B" autocomplete="off" onchange="filterByType()">
+                <label class="btn btn-outline-primary me-2" for="typeB">B 타입</label>
+        
+                <input type="radio" class="btn-check" name="typeOption" id="typeC" value="C" autocomplete="off" onchange="filterByType()">
+                <label class="btn btn-outline-primary" for="typeC">C 타입</label>
+            </div>
+        </div>        
+        <div class="mb-3">
+            <label class="form-label d-block">사전청약자 여부</label>
+            <div>
+                <input type="radio" class="btn-check" name="preApplicant" id="preNo" value="no" autocomplete="off" checked onchange="handlePreApplicantChange()">
+                <label class="btn btn-outline-secondary me-2" for="preNo">일반</label>
+        
+                <input type="radio" class="btn-check" name="preApplicant" id="preYes" value="yes" autocomplete="off" onchange="handlePreApplicantChange()">
+                <label class="btn btn-outline-secondary" for="preYes">사전청약자</label>
+            </div>
         </div>
         <table class="table">
             <thead>
@@ -32,172 +56,312 @@
                 </tr>
             </thead>
             <tbody id="optionTableBody">
-                <tr>
-                    <td>에어컨 일반</td>
-                    <td>거실 + 안방 + 방1 + 방2</td>
-                    <td>4대</td>
-                    <td>6,650,000</td>
+                <tr class="A B C">
+                    <td>시스템에어컨</td>
+                    <td>선택안함</td>
+                    <td>-</td>
+                    <td>0</td>
                     <td><input type="radio" name="airconOption" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
-                    <td>에어컨 일반</td>
-                    <td>거실 + 안방 + 방1 + 방2 + 방3</td>
+                <tr class="A B">
+                    <td>시스템에어컨 일반형</td>
+                    <td>거실+안방+침실1+침실2</td>
+                    <td>4대</td>
+                    <td>5,180,000</td>
+                    <td><input type="radio" name="airconOption" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="C preAircon">
+                    <td>시스템에어컨 일반형</td>
+                    <td>거실+안방+침실1+침실2+알파룸</td>
                     <td>5대</td>
+                    <td>5,780,000</td>
+                    <td><input type="radio" name="airconOption" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="A B preAircon">
+                    <td>시스템에어컨 고급형(공기청정형)</td>
+                    <td>거실+안방+침실1+침실2</td>
+                    <td>4대</td>
+                    <td>5,780,000</td>
+                    <td><input type="radio" name="airconOption" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="C">
+                    <td>시스템에어컨 고급형(공기청정형)</td>
+                    <td>거실+안방+침실1+침실2+알파룸</td>
+                    <td>5대</td>
+                    <td>6,530,000</td>
+                    <td><input type="radio" name="airconOption" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="A">
+                    <td>가전</td>
+                    <td>주방</td>
+                    <td>비스포크 [냉장고(1도어)+냉동고(1도어)+김치냉장고(1도어)] +시스템수납장 포함</td>
                     <td>7,900,000</td>
-                    <td><input type="radio" name="airconOption" onchange="calculateTotal(this)"></td>
-                </tr>
-                <tr>
-                    <td>에어컨 고급</td>
-                    <td>거실 + 안방 + 방1 + 방2</td>
-                    <td>4대</td>
-                    <td>7,500,000</td>
-                    <td><input type="radio" name="airconOption" onchange="calculateTotal(this)"></td>
-                </tr>
-                <tr>
-                    <td>에어컨 고급</td>
-                    <td>거실 + 안방 + 방1 + 방2 + 방3</td>
-                    <td>5대</td>
-                    <td>9,000,000</td>
-                    <td><input type="radio" name="airconOption" onchange="calculateTotal(this)"></td>
-                </tr>
-                <tr>
-                    <td>가전</td>
-                    <td>주방</td>
-                    <td>냉장고(냉장+냉동+김치), 냉장고장</td>
-                    <td>6,800,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
+                <tr class="B C">
                     <td>가전</td>
                     <td>주방</td>
-                    <td>독립형 렌지후드</td>
-                    <td>1,000,000</td>
+                    <td>비스포크 [냉장고(1도어)+냉동고(1도어)+김치냉장고(1도어)] +시스템수납장 포함</td>
+                    <td>7,600,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
+                <tr class="A B C">
                     <td>가전</td>
                     <td>주방</td>
-                    <td>인덕션(3구)</td>
+                    <td>원 스퀘어 후드 (파세코)</td>
+                    <td>600,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="A B C">
+                    <td>가전</td>
+                    <td>주방</td>
+                    <td>3구 인덕션 (린나이)</td>
                     <td>700,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
+                <tr class="A B C">
                     <td>가전</td>
                     <td>주방</td>
-                    <td>전기오븐</td>
+                    <td>전기오븐 (삼성)</td>
                     <td>450,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
+                <tr class="A B C">
                     <td>가전</td>
                     <td>주방</td>
-                    <td>식기세척기</td>
-                    <td>1,600,000</td>
+                    <td>식기세척기 (삼성)</td>
+                    <td>1,300,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
+                <tr class="A B C">
                     <td>가전</td>
-                    <td>주방</td>
+                    <td>공용 욕실(욕실1)</td>
                     <td>비데</td>
                     <td>150,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
-                    <td>가구특화</td>
+                <tr class="B C">
+                    <td>인테리어</td>
                     <td>현관</td>
-                    <td>중문</td>
+                    <td>중문(3연동 슬라이딩 도어)</td>
                     <td>1,800,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
-                    <td>가구특화</td>
+                <tr class="A">
+                    <td>인테리어</td>
                     <td>현관</td>
-                    <td>펜트리(시스템가구)</td>
-                    <td>640,000</td>
+                    <td>중문(스윙 도어)</td>
+                    <td>1,900,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
-                    <td>가구특화</td>
+                <tr class="A">
+                    <td>인테리어</td>
+                    <td>현관</td>
+                    <td>현관 신발장(추가신발장) </td>
+                    <td>1,700,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="B C">
+                    <td>인테리어</td>
+                    <td>현관</td>
+                    <td>현관 팬트리(시스템 선반 + 도어)</td>
+                    <td>1,700,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="A">
+                    <td>인테리어</td>
+                    <td>복도</td>
+                    <td>복도 가구판넬</td>
+                    <td>700,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="C">
+                    <td>인테리어</td>
+                    <td>복도</td>
+                    <td>복도 가구판넬</td>
+                    <td>600,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="B">
+                    <td>인테리어</td>
+                    <td>복도</td>
+                    <td>현관/복도 가구판넬</td>
+                    <td>900,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="A C">
+                    <td>인테리어</td>
+                    <td>거실+주방</td>
+                    <td>우물천장(거실 라인조명 + 주방 라인보드)</td>
+                    <td>2,400,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="B">
+                    <td>인테리어</td>
+                    <td>거실+주방</td>
+                    <td>우물천장(거실 라인조명 + 주방 라인보드)</td>
+                    <td>2,300,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="A">
+                    <td>인테리어</td>
+                    <td>마루 및 타일</td>
+                    <td>바닥 광폭강마루(거실+주방+침실+복도+팬트리)</td>
+                    <td>2,100,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="B">
+                    <td>인테리어</td>
+                    <td>마루 및 타일</td>
+                    <td>바닥 광폭강마루(거실+주방+침실+복도+팬트리)</td>
+                    <td>2,000,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="C">
+                    <td>인테리어</td>
+                    <td>마루 및 타일</td>
+                    <td>바닥 광폭강마루(거실+주방+침실+복도+팬트리)</td>
+                    <td>2,200,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="A B C">
+                    <td>인테리어</td>
+                    <td>포세린타일</td>
+                    <td>벽체 거실 아트월</td>
+                    <td>600,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="A B C">
+                    <td>인테리어</td>
+                    <td>포세린타일</td>
+                    <td>벽체 복도 아트월</td>
+                    <td>500,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="A">
+                    <td>인테리어</td>
                     <td>안방</td>
-                    <td>드레스룸 도어(3연동 슬라이딩 도어)</td>
+                    <td>드레스룸 3연동 슬라이딩 도어</td>
+                    <td>2,000,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="B">
+                    <td>인테리어</td>
+                    <td>안방</td>
+                    <td>드레스룸 3연동 슬라이딩 도어</td>
                     <td>1,800,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
-                    <td>가구특화</td>
+                <tr class="C">
+                    <td>인테리어</td>
                     <td>안방</td>
-                    <td>파우더룸</td>
-                    <td>1,580,000</td>
+                    <td>드레스룸 3연동 슬라이딩 도어</td>
+                    <td>2,200,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
-                    <td>가구특화</td>
+                <tr class="A B C">
+                    <td>인테리어</td>
                     <td>안방</td>
-                    <td>시스템가구</td>
-                    <td>950,000</td>
+                    <td>드레스룸 파우더장</td>
+                    <td>1,500,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
-                    <td>가구특화</td>
+                <tr class="A">
+                    <td>인테리어</td>
                     <td>안방</td>
-                    <td>드레스룸(도어+시스템가구)</td>
+                    <td>드레스룸 시스템 가구</td>
+                    <td>2,200,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="B">
+                    <td>인테리어</td>
+                    <td>안방</td>
+                    <td>드레스룸 시스템 가구</td>
+                    <td>2,300,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="C">
+                    <td>인테리어</td>
+                    <td>안방</td>
+                    <td>드레스룸 시스템 가구</td>
+                    <td>1,600,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="A">
+                    <td>인테리어</td>
+                    <td>주방</td>
+                    <td>아일랜드장 (엔지니어드상판 + 팝업콘센트 포함)</td>
+                    <td>2,100,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="A">
+                    <td>인테리어</td>
+                    <td>주방</td>
+                    <td>엔지니어드 스톤 (벽체 미설치) (주방 상부장 간접 조명 포함)</td>
                     <td>2,500,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
-                    <td>가구특화</td>
-                    <td>작은방</td>
-                    <td>붙박이 가구</td>
+                <tr class="B">
+                    <td>인테리어</td>
+                    <td>주방</td>
+                    <td>엔지니어드 스톤 (벽체 미설치) (주방 상부장 간접 조명 포함)</td>
+                    <td>2,600,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="C">
+                    <td>인테리어</td>
+                    <td>주방</td>
+                    <td>엔지니어드 스톤 (벽체 미설치) (주방 상부장 간접 조명 포함)</td>
+                    <td>2,300,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="A">
+                    <td>인테리어</td>
+                    <td>주방</td>
+                    <td>냉장고장 (냉장고장 + 김치냉장고장 + 수납장)</td>
                     <td>1,500,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
-                    <td>벽면특화</td>
-                    <td>거실</td>
-                    <td>아트월 타일(TV 뒤)</td>
-                    <td>1,060,000</td>
-                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
-                </tr>
-                <tr>
-                    <td>벽면특화</td>
-                    <td>복도</td>
-                    <td>아트월 타일</td>
-                    <td>1,025,000</td>
-                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
-                </tr>
-                <tr>
-                    <td>주방특화</td>
+                <tr class="B">
+                    <td>인테리어</td>
                     <td>주방</td>
-                    <td>대면형 주방(아일랜드장, 장식장, 주방펜트리)</td>
-                    <td>3,800,000</td>
+                    <td>냉장고장 (냉장고장 + 김치냉장고장)</td>
+                    <td>1,300,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
-                    <td>주방특화</td>
+                <tr class="C">
+                    <td>인테리어</td>
                     <td>주방</td>
-                    <td>냉장고장, 김치냉장고장</td>
-                    <td>1,500,000</td>
-                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
-                </tr>
-                <tr>
-                    <td>주방특화</td>
-                    <td>주방</td>
-                    <td>펜트리(도어, 시스템가구)</td>
+                    <td>냉장고장 (냉장고장 + 김치냉장고장)</td>
                     <td>1,400,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
-                    <td>조명특화</td>
+                <tr class="A">
+                    <td>인테리어</td>
                     <td>주방</td>
-                    <td>우물천장 리니어조명, 라인판넬</td>
-                    <td>2,660,000</td>
+                    <td>팬트리 (도어 + 시스템가구)</td>
+                    <td>2,800,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
-                <tr>
-                    <td>조명특화</td>
-                    <td>거실</td>
-                    <td>라인조명</td>
-                    <td>600,000</td>
+                <tr class="B">
+                    <td>인테리어</td>
+                    <td>주방</td>
+                    <td>팬트리 (도어 + 시스템가구)</td>
+                    <td>2,000,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="C">
+                    <td>인테리어</td>
+                    <td>주방</td>
+                    <td>팬트리 (도어 + 시스템가구)</td>
+                    <td>2,300,000</td>
+                    <td><input type="checkbox" onchange="calculateTotal(this)"></td>
+                </tr>
+                <tr class="B">
+                    <td>인테리어</td>
+                    <td>주방</td>
+                    <td>장식장</td>
+                    <td>1,700,000</td>
                     <td><input type="checkbox" onchange="calculateTotal(this)"></td>
                 </tr>
             </tbody>
@@ -212,32 +376,61 @@
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
-        function calculateTotal() {
+        function filterByType() {
+            const selectedType = document.querySelector('input[name="typeOption"]:checked').value;
             const rows = document.querySelectorAll("#optionTableBody tr");
-            let total = 0;
-            rows.forEach(row => {
-                const input = row.querySelector("input[type='checkbox'], input[type='radio']");
-                const priceCell = row.cells[3]; // 금액은 5번째 열 (index 4)
-                const price = parseInt(priceCell.textContent.replace(/,/g, ""), 10);
 
-                if (input.checked) {
-                    total += price;
+            rows.forEach(row => {
+                if (selectedType === "all") {
+                    row.style.display = "";
+                } else if (row.classList.contains(selectedType)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
                 }
             });
-            document.getElementById("totalCell").textContent = total.toLocaleString();
+
+            handlePreApplicantChange();
+            calculateTotal(); 
         }
-        
+
+        function handlePreApplicantChange() {
+            const isPreApplicant = document.querySelector('input[name="preApplicant"]:checked').value === "yes";
+            const selectedType = document.querySelector('input[name="typeOption"]:checked').value;
+
+            if (isPreApplicant) {
+                // 현재 선택된 타입과 preAircon을 동시에 만족하는 행을 찾아서 선택
+                const matchingAirconRow = Array.from(document.querySelectorAll("tr.preAircon"))
+                    .find(row => selectedType === "all" || row.classList.contains(selectedType));
+
+                if (matchingAirconRow) {
+                    const input = matchingAirconRow.querySelector('input[type="radio"]');
+                    input.checked = true;
+                }
+            }
+
+            calculateTotal();
+        }
+
         function calculateTotal() {
             const rows = document.querySelectorAll("#optionTableBody tr");
+            const isPreApplicant = document.querySelector('input[name="preApplicant"]:checked').value === "yes";
             let total = 0;
-            
+
             rows.forEach(row => {
                 const input = row.querySelector("input[type='checkbox'], input[type='radio']");
                 if (!input) return;
-                
-                const priceCell = row.cells[3];
-                const price = parseInt(priceCell.textContent.replace(/,/g, ""), 10);
-                
+
+                let priceCell = row.cells[3];
+                let originalPrice = parseInt(priceCell.textContent.replace(/,/g, ""), 10);
+
+                let price = originalPrice;
+
+                // 사전청약자일 경우 특정 에어컨 항목은 0원 처리
+                if (isPreApplicant && row.classList.contains("preAircon")) {
+                    price = 0;
+                }
+
                 if (input.checked) {
                     total += price;
                     row.classList.add("table-success");
@@ -245,7 +438,7 @@
                     row.classList.remove("table-success");
                 }
             });
-            
+
             document.getElementById("totalCell").textContent = total.toLocaleString();
         }
 
