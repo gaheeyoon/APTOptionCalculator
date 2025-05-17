@@ -228,20 +228,18 @@ const amountTable = [
 ];
 
 function getAmount(dong, hosu) {
-    const hosuStr = hosu.toString();
-    if (hosuStr.length < 2) return null;
-    const ho = parseInt(hosuStr.slice(-1), 10);
-    const floor = parseInt(hosuStr.slice(0, hosuStr.length - 1), 10);
-    const 기준층 = 5;
+    hosu = Number(hosu);
+    const ho = hosu % 100; // 맨 뒷 2자리(실제 아파트 호)
+    const floor = Math.floor(hosu / 100); // 앞자리(층)
 
     for (const row of amountTable) {
         if (row.dongs.includes(Number(dong)) && row.hos.includes(Number(ho))) {
-        if (floor >= 기준층 && row.floors["기준층"]) {
-            return row.floors["기준층"];
-        }
-        if (row.floors[floor]) {
-            return row.floors[floor];
-        }
+            if (row.floors.hasOwnProperty(floor)) {
+                return row.floors[floor];
+            }
+            if (floor >= 5 && row.floors["기준층"]) {
+                return row.floors["기준층"];
+            }
         }
     }
     return null;
